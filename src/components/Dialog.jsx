@@ -1,0 +1,145 @@
+import { motion } from "motion/react";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+function Dialog({ setShowDialogForNewTheme, setInfo }) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [colorPicked, setColorPicked] = useState("#3b82f6");
+  const [showTitleError, setShowTitleError] = useState(false);
+  const [showDescriptionError, setShowDescriptionError] = useState(false);
+
+  function addNewTheme() {
+    const titleIsEmpty = title.trim() === "";
+    const descriptionIsEmpty = description.trim() === "";
+
+    setShowTitleError(titleIsEmpty);
+    setShowDescriptionError(descriptionIsEmpty);
+
+    if (titleIsEmpty || descriptionIsEmpty) return;
+
+    const dateCreated = new Date().toLocaleDateString("en-GB");
+    // Creates the new state based on the old one and adding the theme
+    setInfo((oldInfo) => [
+      ...oldInfo,
+      {
+        themeID: uuidv4(),
+        themeTitle: title,
+        themeDescription: description,
+        themeColor: colorPicked,
+        themeDateCreated: dateCreated,
+        themeFlashcards: [],
+      },
+    ]);
+
+    setShowDialogForNewTheme(false);
+  }
+  const variants = {
+    tap: { scale: 0.95 },
+    hover: { scale: 1.05 },
+  };
+
+  return (
+    <>
+      <div
+        className="fixed top-0 left-0 w-[100%] h-[100%] bg-black/40 z-15 flex justify-center items-center"
+        onClick={() => setShowDialogForNewTheme(false)} // Closes the dialog
+      >
+        <div
+          onClick={(e) => e.stopPropagation()} // Necessary line to stop the dialog from closing when the inner div is clicked.
+          className="flex flex-col z-25 rounded-lg p-6 gap-6 w-[90%] max-w-xl max-h-[90%] overflow-y-auto dark:bg-primary-black-navigation bg-primary-white-smoke"
+        >
+          <div>
+            <h1 className="dark:text-white text-gray-800 text-lg pb-2">
+              Choose a theme title
+            </h1>
+            <input
+              type="text"
+              placeholder="C++ lesson "
+              className="w-full px-4 py-2 border rounded-lg  dark:bg-primary-black-navigation dark:text-white"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            {showTitleError && (
+              <p className="text-red-600">Please set a title</p>
+            )}
+          </div>
+          <div>
+            <h1 className="dark:text-white text-gray-800 text-lg pb-2">
+              Write a short description
+            </h1>
+            <textarea
+              placeholder="Notes/Flashcards for my C++ course in UNI"
+              rows="3"
+              className="w-full px-4 py-2 border  rounded-lg resize-none dark:bg-primary-black-navigation dark:text-white"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            {showDescriptionError && (
+              <p className="text-red-600">Please set a description</p>
+            )}
+          </div>
+          <div>
+            <h1 className="dark:text-white text-gray-800 text-lg">
+              Choose your theme color
+            </h1>
+            <input
+              type="color"
+              defaultValue="#3b82f6"
+              onChange={(e) => setColorPicked(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-end gap-5">
+            <motion.button
+              variants={variants}
+              whileHover="hover"
+              whileTap="tap"
+              className="text-white bg-blue-500 rounded-md cursor-pointer px-7 py-2 border-1 border-blue-800 shadow-[0px_5px_5px_rgba(0,0,0,0.25)]"
+              onClick={() => addNewTheme()}
+            >
+              Add
+            </motion.button>
+            <motion.button
+              variants={variants}
+              whileHover="hover"
+              whileTap="tap"
+              onClick={() => setShowDialogForNewTheme(false)}
+              className="text-gray-500 bg-white rounded-md cursor-pointer px-7 py-2 border-1 border-gray-800 shadow-[0px_5px_5px_rgba(0,0,0,0.25)]"
+            >
+              Cancel
+            </motion.button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Dialog;
+
+// TODO FIX DIALOG SIZE WIDTH AND HEIGHT
+/*
+[
+{
+    themeID:1,
+    themeTitle:"C++",
+    themeShortDescription:"OOP Lang",
+    themeColor:"rgb(0,0,0)",
+    themeDateCreated: Date.now() ?
+    themeFlashcards: [
+        {
+            cardId:X?,
+            cardTitle:"Constructors",
+            cardNote:"Yapayapayapa *yapa",
+            cardDateCreated: Date.now(),
+            cardDateLastModified: Date.now()
+
+        }
+    
+    ]
+},
+
+
+]
+
+
+
+*/

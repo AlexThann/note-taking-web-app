@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /*light mode*/
+  --color-primary-blue-cobalt: #0047a3;
+  --color-primary-blue-celestial: #009ffd;
+  --color-primary-black-eerie: #20201d;
+  --color-primary-white-smoke: #f6f5f3;
+
+  /*Dark mode*/
+  --color-primary-black-navigation: #282434;
+  --color-primary-black-body: #10141c;
+
+  /*Neutrals*/
+  --color-primary-white: #ffffff;
+  --font-rubik: "Rubik", sans serif;
+  --font-inter: "Inter", sans serif;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 350px));
+  justify-content: center;
+  align-items: start;
+  gap: 50px;
+}
