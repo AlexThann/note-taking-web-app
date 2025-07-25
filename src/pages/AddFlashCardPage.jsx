@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router";
 import MainBodyCover from "../components/MainBodyCover";
 import { motion } from "motion/react";
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 function AddFlashCardPage() {
   const navigateBack = useNavigate();
@@ -9,7 +10,32 @@ function AddFlashCardPage() {
   const [showTitleError, setShowTitleError] = useState(false);
   const [showNoteError, setShowNoteError] = useState(false);
   const [title, setTitle] = useState("");
-  const [noteContent, setNoteContent] = useState("");
+  const [noteContent, setNoteContent] = useState(
+    `
+  # C++ Constructors
+
+  **Constructors** are special member functions used to **initialize objects** when they are created.
+
+  ## Key Points
+  - Automatically called when an object is created.  
+  - Have the **same name** as the class.  
+  - **No return type** (not even \`void\`).  
+  - Can be **overloaded** to accept different parameters.
+
+  ### Example
+  \`\`\`
+  cpp
+  class Person {
+  public:
+    Person(std::string name) {
+        this->name = name;
+    }
+  private:
+    std::string name;
+  };
+  \`\`\`
+  `
+  );
   const [previewMarkdown, setPreviewMarkdown] = useState(false);
 
   function addNewFlashCard() {
@@ -42,13 +68,11 @@ function AddFlashCardPage() {
           />
           {showTitleError && <p className="text-red-600">Please set a title</p>}
         </div>
-        <div className="p-2 bg-primary-white dark:bg-[#141b22] rounded-xl">
-          {" "}
-          {/*#141b22  */}
-          <div className="flex  mb-2 rounded-lg overflow-hidden w-max">
+        <div className="">
+          <div className="flex  mb-2  overflow-hidden w-max bg-[#e2e2e2] dark:bg-[#2e2c35] rounded-lg">
             <button
-              className={`dark:text-white :text-black px-3 py-1 cursor-pointer  ${
-                !previewMarkdown ? "bg-[#0c0d0e]" : "bg-[#c2c2c2]"
+              className={`dark:text-white :text-black px-3 py-1 rounded-lg cursor-pointer  ${
+                !previewMarkdown ? "bg-[#c9c9c9] dark:bg-[#161718]" : ""
               }`}
               onClick={() => setPreviewMarkdown(false)}
             >
@@ -56,21 +80,29 @@ function AddFlashCardPage() {
             </button>
 
             <button
-              className="dark:text-white :text-black px-3 py-1 bg-purple-800 cursor-pointer "
+              className={`dark:text-white :text-black px-3 py-1 rounded-lg cursor-pointer  ${
+                previewMarkdown ? "bg-[#c9c9c9] dark:bg-[#161718]" : ""
+              }`}
               onClick={() => setPreviewMarkdown(true)}
             >
               Preview
             </button>
           </div>
+          {/* Tailwind by default removes the style from h1's etc etc. Either use a tailwind plugin called typography where by using class prose, the genereted text from the markdown
+           has some default stylings, OR i can style each component by use of the components prop on ReactMarkdown. For simplicity i used the plugin.
+           prose-invert is for dark theme*/}
           {!previewMarkdown ? (
             <textarea
               placeholder="Constructors in C++ are special member functions that initialize objects when they are created."
               rows="3"
-              className="w-full h-130 px-4 py-2 border  rounded-lg dark:bg-primary-black-navigation dark:text-white"
+              className="w-full h-130 px-4 my-6 border  rounded-lg bg-primary-white-smoke dark:bg-primary-black-navigation dark:text-white"
+              value={noteContent}
               onChange={(e) => setNoteContent(e.target.value)}
             />
           ) : (
-            <div>fdasfasd</div>
+            <div className="border-1 rounded-lg px-4 py-6 prose dark:prose-invert max-w-full mt-7">
+              <ReactMarkdown>{noteContent}</ReactMarkdown>
+            </div>
           )}
           {showNoteError && <p className="text-red-600">Please set a note</p>}
         </div>
