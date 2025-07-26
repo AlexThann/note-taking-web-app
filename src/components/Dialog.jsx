@@ -1,15 +1,28 @@
 import { motion } from "motion/react";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
-function Dialog({ setShowDialogForNewTheme, setInfo }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [colorPicked, setColorPicked] = useState("#3b82f6");
+// prevTitle etc only used for edit mode.
+function Dialog({
+  setShowDialog,
+  setInfo,
+  prevTheme = {
+    themeID: "",
+    themeTitle: "",
+    themeDescription: "",
+    themeColor: "#3b82f6",
+    themeDateCreated: "",
+    themeFlashCards: [],
+  },
+  action,
+  mode,
+}) {
+  const [title, setTitle] = useState(prevTheme.themeTitle);
+  const [description, setDescription] = useState(prevTheme.themeDescription);
+  const [colorPicked, setColorPicked] = useState(prevTheme.themeColor);
   const [showTitleError, setShowTitleError] = useState(false);
   const [showDescriptionError, setShowDescriptionError] = useState(false);
 
-  function addNewTheme() {
+  function actionFunc() {
     const titleIsEmpty = title.trim() === "";
     const descriptionIsEmpty = description.trim() === "";
 
@@ -20,19 +33,11 @@ function Dialog({ setShowDialogForNewTheme, setInfo }) {
 
     const dateCreated = new Date().toLocaleDateString("en-GB");
     // Creates the new state based on the old one and adding the theme
-    setInfo((oldInfo) => [
-      ...oldInfo,
-      {
-        themeID: uuidv4(),
-        themeTitle: title,
-        themeDescription: description,
-        themeColor: colorPicked,
-        themeDateCreated: dateCreated,
-        themeFlashCards: [],
-      },
-    ]);
+    setInfo((oldInfo) =>
+      action(oldInfo, title, description, colorPicked, dateCreated, prevTheme)
+    );
 
-    setShowDialogForNewTheme(false);
+    setShowDialog(false);
   }
   const variants = {
     tap: { scale: 0.95 },
@@ -43,7 +48,7 @@ function Dialog({ setShowDialogForNewTheme, setInfo }) {
     <>
       <div
         className="fixed top-0 left-0 w-[100%] h-[100%] bg-black/40 z-15 flex justify-center items-center"
-        onClick={() => setShowDialogForNewTheme(false)} // Closes the dialog
+        onClick={() => setShowDialog(false)} // Closes the dialog
       >
         <div
           onClick={(e) => e.stopPropagation()} // Necessary line to stop the dialog from closing when the inner div is clicked.
@@ -55,7 +60,8 @@ function Dialog({ setShowDialogForNewTheme, setInfo }) {
             </h1>
             <input
               type="text"
-              placeholder="C++ lesson "
+              placeholder="C++ course "
+              value={title}
               className="w-full px-4 py-2 border rounded-lg  dark:bg-primary-black-navigation dark:text-white"
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -70,6 +76,7 @@ function Dialog({ setShowDialogForNewTheme, setInfo }) {
             <textarea
               placeholder="Notes/Flashcards for my C++ course in UNI"
               rows="3"
+              value={description}
               className="w-full px-4 py-2 border  rounded-lg resize-none dark:bg-primary-black-navigation dark:text-white"
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -83,7 +90,7 @@ function Dialog({ setShowDialogForNewTheme, setInfo }) {
             </h1>
             <input
               type="color"
-              defaultValue="#3b82f6"
+              value={colorPicked}
               onChange={(e) => setColorPicked(e.target.value)}
             />
           </div>
@@ -93,15 +100,15 @@ function Dialog({ setShowDialogForNewTheme, setInfo }) {
               whileHover="hover"
               whileTap="tap"
               className="text-white bg-blue-500 rounded-md cursor-pointer px-7 py-2 border-1 border-blue-800 shadow-[0px_5px_5px_rgba(0,0,0,0.25)]"
-              onClick={() => addNewTheme()}
+              onClick={() => actionFunc()}
             >
-              Add
+              {mode}
             </motion.button>
             <motion.button
               variants={variants}
               whileHover="hover"
               whileTap="tap"
-              onClick={() => setShowDialogForNewTheme(false)}
+              onClick={() => setShowDialog(false)}
               className="text-gray-500 bg-white rounded-md cursor-pointer px-7 py-2 border-1 border-gray-800 shadow-[0px_5px_5px_rgba(0,0,0,0.25)]"
             >
               Cancel

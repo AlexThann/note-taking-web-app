@@ -46,7 +46,7 @@ function ShowFlashCardPage() {
   }
   return (
     <MainBodyCover>
-      <div className="px-10 py-6 m-auto mt-15 shadow-[-5px_5px_7px_rgba(0,0,0,0.3)] flex flex-col gap-7 rounded-lg w-[95%] md:w-[80%] lg:w-[75%] dark:bg-primary-black-navigation bg-primary-white-smoke">
+      <div className="px-10 py-6 m-auto my-15 shadow-[-5px_5px_7px_rgba(0,0,0,0.3)] flex flex-col gap-7 rounded-lg w-[95%] md:w-[80%] lg:w-[75%] dark:bg-primary-black-navigation bg-primary-white-smoke">
         <div className="flex justify-between items-center">
           <BackButton url={theme.themeID} />
           <div className="text-3xl font-bold dark:text-white">

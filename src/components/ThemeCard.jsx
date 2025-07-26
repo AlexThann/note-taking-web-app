@@ -3,7 +3,18 @@ import DeleteButton from "./DeleteButton";
 import { motion } from "motion/react";
 import EditButton from "./EditButton";
 
-function ThemeCard({ themeElement, setInfo }) {
+function ThemeCard({
+  themeElement,
+  setInfo,
+  setThemeToEdit,
+  setShowEditDialog,
+}) {
+  function handleEdit(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    setThemeToEdit(themeElement);
+    setShowEditDialog(true);
+  }
   function handleDelete(e) {
     // Because the parent method is addTheme, i block it using stopPropagation and prevent default
     e.preventDefault();
@@ -46,7 +57,7 @@ function ThemeCard({ themeElement, setInfo }) {
             Created @ {themeElement.themeDateCreated}
           </p>
         </div>
-        <EditButton enableDarkMode={true} />
+        <EditButton enableDarkMode={true} editAction={handleEdit} />
         <DeleteButton handleDeleteAction={handleDelete} />
       </motion.div>
     </Link>

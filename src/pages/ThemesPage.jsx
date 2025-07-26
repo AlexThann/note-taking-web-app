@@ -5,11 +5,15 @@ import ThemeCard from "../components/ThemeCard";
 import Dialog from "../components/Dialog";
 import AddButton from "../components/AddButton";
 import MainBodyCover from "../components/MainBodyCover";
+import addTheme from "../util/addTheme";
+import editTheme from "../util/editTheme";
 
 function ThemesPage() {
   const { info, setInfo } = useContext(InformationContext);
 
   const [showDialogForNewTheme, setShowDialogForNewTheme] = useState(false);
+  const [showEditDialog, setShowEditDialog] = useState(false);
+  const [themeToEdit, setThemeToEdit] = useState({});
 
   function addNewTheme() {
     setShowDialogForNewTheme(true);
@@ -25,6 +29,8 @@ function ThemesPage() {
               key={themeElement.themeID}
               themeElement={themeElement}
               setInfo={setInfo}
+              setThemeToEdit={setThemeToEdit}
+              setShowEditDialog={setShowEditDialog}
             />
           );
         })}
@@ -32,9 +38,22 @@ function ThemesPage() {
       </GridContainer>
       {showDialogForNewTheme && (
         <Dialog
-          setShowDialogForNewTheme={setShowDialogForNewTheme}
+          setShowDialog={setShowDialogForNewTheme}
           info={info}
           setInfo={setInfo}
+          action={addTheme}
+          mode="Add"
+        />
+      )}
+
+      {showEditDialog && (
+        <Dialog
+          setShowDialog={setShowEditDialog}
+          info={info}
+          setInfo={setInfo}
+          action={editTheme}
+          mode="Edit"
+          prevTheme={themeToEdit}
         />
       )}
     </MainBodyCover>
