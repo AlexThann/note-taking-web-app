@@ -5,6 +5,7 @@ import { useState, useContext } from "react";
 import ReactMarkdown from "react-markdown";
 import { v4 as uuidv4 } from "uuid";
 import InformationContext from "../contexts/InformationContext";
+import { useEffect } from "react";
 
 function AddFlashCardPage() {
   const { info, setInfo } = useContext(InformationContext);
@@ -47,6 +48,14 @@ function AddFlashCardPage() {
   const brightGreen = "#86efac";
   const brightYellow = "#fde68a";
   const [colorSelected, setColorSelected] = useState(brightBlue);
+
+  useEffect(() => {
+    // Checks on render if the URL given is a valid themeID, else redirects.
+    const validURL = info.find(
+      (themeItem) => themeItem.themeID === URLParams.theme
+    );
+    if (!validURL) navigateBack("/error");
+  }, []);
 
   function addNewFlashCard() {
     const titleIsEmpty = title.trim() === "";
@@ -106,9 +115,10 @@ function AddFlashCardPage() {
           <div className="flex items-center gap-4 pt-2">
             {[brightBlue, brightPink, brightGreen, brightYellow].map(
               (color) => (
-                <button
+                <motion.button
+                  whileHover={{ scale: 0.95 }}
                   key={color}
-                  className={` rounded-full border-2 ${
+                  className={` rounded-full border-2 cursor-pointer ${
                     colorSelected === color
                       ? "border-2 border-black dark:border-white w-[23px] h-[23px]"
                       : "border-transparent w-6 h-6"

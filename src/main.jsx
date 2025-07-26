@@ -7,7 +7,9 @@ import ThemesPage from "./pages/ThemesPage.jsx";
 import FlashcardsPage from "./pages/FlashcardsPage.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import AddFlashCardPage from "./pages/AddFlashCardPage.jsx";
+import ShowFlashCardPage from "./pages/ShowFlashCardPage.jsx";
 
+/* TODO: Accessibility code duplication, useMemo */
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +26,7 @@ const router = createBrowserRouter([
         element: <AddFlashCardPage />,
       },
       { path: "/error", element: <ErrorPage /> },
+      { path: ":theme/:card", element: <ShowFlashCardPage /> },
     ],
   },
 ]);

@@ -5,7 +5,7 @@ function DeleteButton({ handleDeleteAction }) {
   return (
     <motion.div
       whileHover={{ scale: 1.3 }}
-      className="flex items-center text-red-600 text-xl"
+      className="flex items-center text-red-600 p-1 text-xl cursor-pointer"
       onClick={(e) => {
         handleDeleteAction(e);
       }}

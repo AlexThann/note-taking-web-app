@@ -1,6 +1,7 @@
 import { Link } from "react-router";
-import DeleteButton from "./deleteButton";
+import DeleteButton from "./DeleteButton";
 import { motion } from "motion/react";
+import EditButton from "./EditButton";
 
 function ThemeCard({ themeElement, setInfo }) {
   function handleDelete(e) {
@@ -45,6 +46,7 @@ function ThemeCard({ themeElement, setInfo }) {
             Created @ {themeElement.themeDateCreated}
           </p>
         </div>
+        <EditButton enableDarkMode={true} />
         <DeleteButton handleDeleteAction={handleDelete} />
       </motion.div>
     </Link>

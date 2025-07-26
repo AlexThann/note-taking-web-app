@@ -26,6 +26,7 @@ function FlashcardsPage() {
   return (
     <MainBodyCover>
       {/* For each theme created a themeCard. */}
+
       <GridContainer>
         {themeObject.themeFlashCards.map((card) => (
           <FlashCard theme={themeObject} key={card.cardID} card={card} />
