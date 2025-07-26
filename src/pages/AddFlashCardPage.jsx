@@ -1,15 +1,19 @@
 import { useNavigate, useParams } from "react-router";
 import MainBodyCover from "../components/MainBodyCover";
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import ReactMarkdown from "react-markdown";
+import { v4 as uuidv4 } from "uuid";
+import InformationContext from "../contexts/InformationContext";
 
 function AddFlashCardPage() {
+  const { info, setInfo } = useContext(InformationContext);
   const navigateBack = useNavigate();
   const URLParams = useParams();
   const [showTitleError, setShowTitleError] = useState(false);
   const [showNoteError, setShowNoteError] = useState(false);
   const [title, setTitle] = useState("");
+
   const [noteContent, setNoteContent] = useState(
     `
   # C++ Constructors
@@ -37,6 +41,12 @@ function AddFlashCardPage() {
   `
   );
   const [previewMarkdown, setPreviewMarkdown] = useState(false);
+  //"#f9a8d4", "#93c5fd", "#86efac", "#fde68a"
+  const brightPink = "#f9a8d4";
+  const brightBlue = "#93c5fd";
+  const brightGreen = "#86efac";
+  const brightYellow = "#fde68a";
+  const [colorSelected, setColorSelected] = useState(brightBlue);
 
   function addNewFlashCard() {
     const titleIsEmpty = title.trim() === "";
@@ -48,7 +58,29 @@ function AddFlashCardPage() {
     if (titleIsEmpty || noteContentIsEmpty) return;
 
     const dateCreated = new Date().toLocaleDateString("en-GB");
+    const themeID = URLParams.theme;
+    const newFlashCard = {
+      cardID: uuidv4(),
+      cardTitle: title,
+      cardNote: noteContent,
+      cardDateCreated: dateCreated,
+      cardDateModifiedLast: dateCreated,
+      cardColor: colorSelected,
+    };
+
+    setInfo((prevInfo) =>
+      prevInfo.map((theme) =>
+        theme.themeID === themeID
+          ? {
+              ...theme,
+              themeFlashCards: [...theme.themeFlashCards, newFlashCard],
+            }
+          : theme
+      )
+    );
+    navigateBack(`/${URLParams.theme}`);
   }
+
   const variants = {
     tap: { scale: 0.95 },
     hover: { scale: 1.05 },
@@ -66,9 +98,29 @@ function AddFlashCardPage() {
             className="w-full px-4 py-2 border rounded-lg  dark:bg-primary-black-navigation dark:text-white"
             onChange={(e) => setTitle(e.target.value)}
           />
+
           {showTitleError && <p className="text-red-600">Please set a title</p>}
+          <h1 className="dark:text-white text-gray-800 text-lg pt-4">
+            Choose the card/note color
+          </h1>
+          <div className="flex items-center gap-4 pt-2">
+            {[brightBlue, brightPink, brightGreen, brightYellow].map(
+              (color) => (
+                <button
+                  key={color}
+                  className={` rounded-full border-2 ${
+                    colorSelected === color
+                      ? "border-2 border-black dark:border-white w-[23px] h-[23px]"
+                      : "border-transparent w-6 h-6"
+                  }`}
+                  style={{ backgroundColor: color }}
+                  onClick={() => setColorSelected(color)}
+                />
+              )
+            )}
+          </div>
         </div>
-        <div className="">
+        <div>
           <div className="flex  mb-2  overflow-hidden w-max bg-[#e2e2e2] dark:bg-[#2e2c35] rounded-lg">
             <button
               className={`dark:text-white :text-black px-3 py-1 rounded-lg cursor-pointer  ${
@@ -100,7 +152,7 @@ function AddFlashCardPage() {
               onChange={(e) => setNoteContent(e.target.value)}
             />
           ) : (
-            <div className="border-1 rounded-lg px-4 py-6 prose dark:prose-invert max-w-full mt-7">
+            <div className="border-1 rounded-lg px-4 py-6 prose prose-sm md:prose-base dark:prose-invert max-w-full mt-7">
               <ReactMarkdown>{noteContent}</ReactMarkdown>
             </div>
           )}

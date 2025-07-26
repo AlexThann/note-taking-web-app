@@ -25,6 +25,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 350px));
   justify-content: center;
-  align-items: start;
+  align-items: center;
   gap: 50px;
 }

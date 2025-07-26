@@ -1,6 +1,6 @@
-import { motion } from "motion/react";
 import { Link } from "react-router";
-import { FaTrashAlt } from "react-icons/fa";
+import DeleteButton from "./deleteButton";
+import { motion } from "motion/react";
 
 function ThemeCard({ themeElement, setInfo }) {
   function handleDelete(e) {
@@ -28,7 +28,7 @@ function ThemeCard({ themeElement, setInfo }) {
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className=" min-h-28 flex border rounded-lg overflow-hidden shadow-[-5px_5px_7px_rgba(0,0,0,0.3)] bg-primary-white-smoke dark:bg-primary-black-navigation cursor-pointer"
+        className=" min-h-28 flex pr-4 border rounded-lg overflow-hidden shadow-[-5px_5px_7px_rgba(0,0,0,0.3)] bg-primary-white-smoke dark:bg-primary-black-navigation cursor-pointer"
       >
         <div
           className="w-[9px]"
@@ -45,15 +45,7 @@ function ThemeCard({ themeElement, setInfo }) {
             Created @ {themeElement.themeDateCreated}
           </p>
         </div>
-        <motion.div
-          whileHover={{ scale: 1.3 }}
-          className="flex items-center pr-4 text-red-600 text-xl"
-          onClick={(e) => {
-            handleDelete(e);
-          }}
-        >
-          <FaTrashAlt />
-        </motion.div>
+        <DeleteButton handleDeleteAction={handleDelete} />
       </motion.div>
     </Link>
   );

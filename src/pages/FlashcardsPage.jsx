@@ -10,7 +10,8 @@ function FlashcardsPage() {
   const { info, setInfo } = useContext(InformationContext);
   // useParams() gets the params from the URL but it returns an object based on the path name .ex /:theme so you need to keep that in mind when parsing
   const params = useParams();
-
+  const selectedTheme = params.theme;
+  const themeObject = info.find((theme) => theme.themeID === selectedTheme);
   // used to navigate to the error page.
   const navigateToError = useNavigate();
 
@@ -26,7 +27,9 @@ function FlashcardsPage() {
     <MainBodyCover>
       {/* For each theme created a themeCard. */}
       <GridContainer>
-        <FlashCard />
+        {themeObject.themeFlashCards.map((card) => (
+          <FlashCard theme={themeObject} key={card.cardID} card={card} />
+        ))}
         <Link to="new" className="flex justify-center items-center">
           <AddButton text="New Flashcard" />
         </Link>

@@ -28,7 +28,7 @@ function Dialog({ setShowDialogForNewTheme, setInfo }) {
         themeDescription: description,
         themeColor: colorPicked,
         themeDateCreated: dateCreated,
-        themeFlashcards: [],
+        themeFlashCards: [],
       },
     ]);
 
