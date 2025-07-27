@@ -121,32 +121,3 @@ function Dialog({
 }
 
 export default Dialog;
-
-// TODO FIX DIALOG SIZE WIDTH AND HEIGHT
-/*
-[
-{
-    themeID:1,
-    themeTitle:"C++",
-    themeShortDescription:"OOP Lang",
-    themeColor:"rgb(0,0,0)",
-    themeDateCreated: Date.now() ?
-    themeFlashcards: [
-        {
-            cardId:X?,
-            cardTitle:"Constructors",
-            cardNote:"Yapayapayapa *yapa",
-            cardDateCreated: Date.now(),
-            cardDateLastModified: Date.now()
-
-        }
-    
-    ]
-},
-
-
-]
-
-
-
-*/

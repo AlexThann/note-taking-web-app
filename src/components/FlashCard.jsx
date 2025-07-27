@@ -1,13 +1,14 @@
 import DeleteButton from "./DeleteButton";
 import { motion } from "motion/react";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import InformationContext from "../contexts/InformationContext";
 import EditButton from "./EditButton";
 import { Link } from "react-router";
 import deleteFlashCard from "../util/deleteFlashCard";
-
+import { useNavigate } from "react-router";
 function FlashCard({ card, theme }) {
   const { info, setInfo } = useContext(InformationContext);
+  const navigate = useNavigate();
 
   //useEffect(() => console.log(info), [info]);
 
@@ -21,6 +22,12 @@ function FlashCard({ card, theme }) {
     if (!confirmed) return; // Stop if user canceled
 
     setInfo((oldInfo) => deleteFlashCard(theme.themeID, card.cardID, oldInfo));
+  }
+
+  function handleEdit(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    navigate(`${card.cardID}/edit`);
   }
 
   return (
@@ -40,7 +47,7 @@ function FlashCard({ card, theme }) {
               Modified @ {card.cardDateModifiedLast}
             </p>
             <div className="flex">
-              <EditButton />
+              <EditButton editAction={handleEdit} />
               <DeleteButton handleDeleteAction={handleDelete} />
             </div>
           </div>

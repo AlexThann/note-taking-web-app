@@ -1,5 +1,5 @@
 import MainBodyCover from "../components/MainBodyCover";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, Link } from "react-router";
 import { useEffect, useContext, useState } from "react";
 import InformationContext from "../contexts/InformationContext";
 import ReactMarkdown from "react-markdown";
@@ -53,7 +53,9 @@ function ShowFlashCardPage() {
             {card.cardTitle}
           </div>
           <div className="flex gap-1">
-            <EditButton enableDarkMode={true} />
+            <Link to="edit">
+              <EditButton enableDarkMode={true} />
+            </Link>
             <DeleteButton handleDeleteAction={handleDelete} />
           </div>
         </div>
