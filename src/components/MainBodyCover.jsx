@@ -1,6 +1,7 @@
 function MainBodyCover({ children }) {
   return (
-    <section className="flex-1 bg-white dark:bg-primary-black-body">
+    // NOTE HERE RELATIVE POS
+    <section className="flex-1 relative bg-white dark:bg-primary-black-body">
       {children}
     </section>
   );
