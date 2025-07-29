@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router";
-
 import { motion } from "motion/react";
 import { useState, useContext } from "react";
 import ReactMarkdown from "react-markdown";
@@ -7,6 +6,9 @@ import InformationContext from "../contexts/InformationContext";
 import CheatSheetButton from "./CheatSheetButton";
 import MarkdownCheatSheet from "./MarkdownCheatSheet";
 
+// This component is used when adding a new flashcard or editing an existing one. Like the dialog component it receives the action (edit or add).
+// the prevCard which is either a default one if we are adding a new flashcard or is passed by the parent component for editing.
+// Mode is either edit or add as text for the button
 function FlashCardPageWrapper({
   prevCard = {
     cardID: "",
@@ -24,17 +26,21 @@ function FlashCardPageWrapper({
   const URLParams = useParams();
   const [showTitleError, setShowTitleError] = useState(false);
   const [showNoteError, setShowNoteError] = useState(false);
+
+  //Used to toggle between edit and preview
   const [previewMarkdown, setPreviewMarkdown] = useState(false);
 
   const [title, setTitle] = useState(prevCard.cardTitle);
   const [noteContent, setNoteContent] = useState(prevCard.cardNote);
 
+  // notes/flashcard bg colors
   const brightPink = "#f9a8d4";
   const brightBlue = "#93c5fd";
   const brightGreen = "#86efac";
   const brightYellow = "#fde68a";
   const [colorSelected, setColorSelected] = useState(prevCard.cardColor);
 
+  // either edit or add, based on the action func.
   function actionOnFlashCard() {
     const titleIsEmpty = title.trim() === "";
     const noteContentIsEmpty = noteContent.trim() === "";
@@ -55,6 +61,7 @@ function FlashCardPageWrapper({
       themeID,
       prevCard.cardID
     );
+    // after adding or editing it navigates back to the rest of the cards.
     navigateBack(`/${URLParams.theme}`);
   }
 

@@ -3,6 +3,7 @@ import { MdOutlineLightMode } from "react-icons/md";
 
 import { Link } from "react-router";
 
+// Navbar of the project.
 export default function NavBar({ darkMode, setDarkMode }) {
   return (
     <nav className=" h-2/12 flex justify-between px-[5%] py-8  z-10 shadow-md  dark:bg-primary-black-navigation bg-primary-white-smoke text-white">

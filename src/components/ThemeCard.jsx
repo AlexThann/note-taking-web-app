@@ -3,18 +3,22 @@ import DeleteButton from "./DeleteButton";
 import { motion } from "motion/react";
 import EditButton from "./EditButton";
 
+// Main theme card, receives the themeElement and some basic set funcs.
 function ThemeCard({
   themeElement,
   setInfo,
   setThemeToEdit,
   setShowEditDialog,
 }) {
+  // Handles themecard edit
   function handleEdit(e) {
     e.preventDefault();
     e.stopPropagation();
     setThemeToEdit(themeElement);
     setShowEditDialog(true);
   }
+
+  // handles themecard deletion
   function handleDelete(e) {
     // Because the parent method is addTheme, i block it using stopPropagation and prevent default
     e.preventDefault();

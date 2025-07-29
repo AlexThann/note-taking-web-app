@@ -6,12 +6,15 @@ import EditButton from "./EditButton";
 import { Link } from "react-router";
 import deleteFlashCard from "../util/deleteFlashCard";
 import { useNavigate } from "react-router";
+
+// Main flashcard component. receives the card information and the parent theme.
 function FlashCard({ card, theme }) {
   const { info, setInfo } = useContext(InformationContext);
   const navigate = useNavigate();
 
   //useEffect(() => console.log(info), [info]);
 
+  // Deletes the flashcard of the theme
   function handleDelete(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -24,6 +27,7 @@ function FlashCard({ card, theme }) {
     setInfo((oldInfo) => deleteFlashCard(theme.themeID, card.cardID, oldInfo));
   }
 
+  // Edits the flashcard
   function handleEdit(e) {
     e.stopPropagation();
     e.preventDefault();

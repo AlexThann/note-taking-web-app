@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import addFlashCard from "../util/addFlashCard";
 import FlashCardPageWrapper from "../components/FlashCardPageWrapper";
 
+// When adding a flashcard this page is used. Utilizes FlashCardPageWrapper component
 function AddFlashCardPage() {
   const { info, setInfo } = useContext(InformationContext);
   const navigateBack = useNavigate();

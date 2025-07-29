@@ -1,6 +1,7 @@
 import { MdQuestionMark } from "react-icons/md";
 import { motion } from "motion/react";
 
+// Cheat sheet button to show the component which is used to help the user when editing a note/flashcard.
 function CheatSheetButton({ setCheatSheetVisible }) {
   return (
     <motion.div

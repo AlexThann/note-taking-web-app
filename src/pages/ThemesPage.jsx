@@ -8,6 +8,7 @@ import MainBodyCover from "../components/MainBodyCover";
 import addTheme from "../util/addTheme";
 import editTheme from "../util/editTheme";
 
+// This is the initial themes page
 function ThemesPage() {
   const { info, setInfo } = useContext(InformationContext);
 
@@ -36,6 +37,7 @@ function ThemesPage() {
         })}
         <AddButton text="New Theme" methodOnClick={addNewTheme} />
       </GridContainer>
+      {/* Dialog is used for adding a new theme and editing a existing one. */}
       {showDialogForNewTheme && (
         <Dialog
           setShowDialog={setShowDialogForNewTheme}

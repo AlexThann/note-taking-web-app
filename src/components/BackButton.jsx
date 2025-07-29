@@ -2,6 +2,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
 
+// Back button is used to navigate to the previous page or url to be exact
 function BackButton({ url }) {
   const navigate = useNavigate();
 

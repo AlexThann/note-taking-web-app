@@ -1,6 +1,7 @@
 import { FaRegEdit } from "react-icons/fa";
 import { motion } from "motion/react";
 
+// Edit button, receives an editAction since its used for themes and flashcards.
 function EditButton({ editAction, enableDarkMode = false }) {
   return (
     <motion.div

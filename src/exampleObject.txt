@@ -1,0 +1,24 @@
+This is what is saved on localStorage, basically the information in this format:
+
+[
+    {
+        "themeID": "cc368147-06f8-409c-9ee6-00c208e44d26",
+        "themeTitle": "C++ Course",
+        "themeDescription": "Notes / Flashcards for my C++ course in UNI",
+        "themeColor": "#00ffaa",
+        "themeDateCreated": "26/07/2025",
+        "themeFlashCards": [
+            {
+                "cardID": "84abcd22-cd55-4b52-9071-1101120e26e3",
+                "cardTitle": "C++ Constructor Basics??",
+                "cardNote": "\n  # C++ Constructors\n\n  **Constructors** are special member functions used to **initialize objects** when they are created.\n\n  ## Key Points\n  - Automatically called when an object is created.  \n  - Have the **same name** as the class.  \n  - **No return type** (not even `void`).  \n  - Can be **overloaded** to accept different parameters.\n\n  ### Example\n  ```\n  cpp\n  class Person {\n  public:\n    Person(std::string name) {\n        this->name = name;\n    }\n  private:\n    std::string name;\n  };fasdfasfdafsaa\n  ```\n  ",
+                "cardDateCreated": "26/07/2025",
+                "cardDateModifiedLast": "28/07/2025",
+                "cardColor": "#93c5fd"
+            },
+            ... more FlashcardObjects
+        ]
+    },
+    ... more themeObjects
+]
+

@@ -1,5 +1,7 @@
 import ReactMarkdown from "react-markdown";
 
+// Markdown cheat sheet component. Just has some tables with basic markdown syntax.
+// Could improve it by using components possibly but not really that serious
 function MarkdownCheatSheet({ setCheatSheetVisible }) {
   return (
     <div

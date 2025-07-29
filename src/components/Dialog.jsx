@@ -2,6 +2,9 @@ import { motion } from "motion/react";
 import { useState } from "react";
 
 // prevTitle etc only used for edit mode.
+// Dialog is used on the themesPage for editing or adding a new theme. prevTheme is used for editing, eitherwise its initialized as a empty object (or default object)
+// action is for an edit function or an add function on the util folder (editTheme or addTheme)
+// Mode is just text either Edit or Add
 function Dialog({
   setShowDialog,
   setInfo,
@@ -16,9 +19,11 @@ function Dialog({
   action,
   mode,
 }) {
+  // Sets the current state of the inputs as either the default ones or the previous theme's
   const [title, setTitle] = useState(prevTheme.themeTitle);
   const [description, setDescription] = useState(prevTheme.themeDescription);
   const [colorPicked, setColorPicked] = useState(prevTheme.themeColor);
+  // Used for error showing when a title or description is not given
   const [showTitleError, setShowTitleError] = useState(false);
   const [showDescriptionError, setShowDescriptionError] = useState(false);
 
@@ -26,19 +31,22 @@ function Dialog({
     const titleIsEmpty = title.trim() === "";
     const descriptionIsEmpty = description.trim() === "";
 
+    // If the title is empty or the description is empty then set the error labels to appear and return from the func.
     setShowTitleError(titleIsEmpty);
     setShowDescriptionError(descriptionIsEmpty);
 
     if (titleIsEmpty || descriptionIsEmpty) return;
 
     const dateCreated = new Date().toLocaleDateString("en-GB");
-    // Creates the new state based on the old one and adding the theme
+    // Creates the new state based on the old one and executes the action func. either add or edit on util.
     setInfo((oldInfo) =>
       action(oldInfo, title, description, colorPicked, dateCreated, prevTheme)
     );
 
     setShowDialog(false);
   }
+
+  // variants for animations
   const variants = {
     tap: { scale: 0.95 },
     hover: { scale: 1.05 },

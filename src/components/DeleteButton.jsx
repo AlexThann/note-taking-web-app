@@ -1,6 +1,7 @@
 import { FaTrashAlt } from "react-icons/fa";
 import { motion } from "motion/react";
 
+// Delete button for either deleting a theme or flashcard, based on handleDeleteAction
 function DeleteButton({ handleDeleteAction }) {
   return (
     <motion.div

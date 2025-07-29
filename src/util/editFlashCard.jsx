@@ -1,3 +1,4 @@
+// Used to edit a flashcard object
 export default function editFlashCard(
   setInfo,
   title,

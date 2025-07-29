@@ -2,7 +2,7 @@ Ookay
 
 # For typography
 
-- Either Rubik or Inter
+- Either Rubik or **Inter**
 
 # Colors
 

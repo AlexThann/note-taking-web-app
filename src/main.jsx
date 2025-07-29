@@ -10,7 +10,8 @@ import AddFlashCardPage from "./pages/AddFlashCardPage.jsx";
 import ShowFlashCardPage from "./pages/ShowFlashCardPage.jsx";
 import EditFlashCardPage from "./pages/EditFlashCardPage.jsx";
 
-/* TODO: Accessibility code duplication, useMemo */
+/* BrowserRouter for the site. Some routes are siblings instead of children because i want to replace the element not add to it*/
+// Ex: :theme/:card and :theme/:card/edit are siblings because otherwise it wouldn't replace the element shown but would add to it.
 const router = createBrowserRouter([
   {
     path: "/",

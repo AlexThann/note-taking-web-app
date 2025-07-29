@@ -5,6 +5,7 @@ import { useContext, useState, useEffect } from "react";
 import InformationContext from "../contexts/InformationContext";
 import editFlashCard from "../util/editFlashCard";
 
+// When editing a flashcard this page is used. Utilizes FlashCardPageWrapper component
 function EditFlashCardPage() {
   const { info, setInfo } = useContext(InformationContext);
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ function EditFlashCardPage() {
   }, []);
   // console.log(cardToEdit);
 
+  // this is used because otherwise the prevCard on FlashCardPageWrapper will be null, since useEffect won't set the correct one.
   if (!cardToEdit) return null;
 
   return (

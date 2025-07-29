@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { IoAddCircleOutline } from "react-icons/io5";
 
+// Add button is used for creating a new theme OR a new flashcard, depends on the onClick method
 function AddButton({ methodOnClick, text }) {
   return (
     <motion.button

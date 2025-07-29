@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
+// Function to add a theme.
 export default function addTheme(
   info,
   title,

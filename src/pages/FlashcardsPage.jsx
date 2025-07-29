@@ -6,6 +6,7 @@ import AddButton from "../components/AddButton";
 import MainBodyCover from "../components/MainBodyCover";
 import FlashCard from "../components/FlashCard";
 
+// flashcard page when clicking on a theme
 function FlashcardsPage() {
   const { info, setInfo } = useContext(InformationContext);
   // useParams() gets the params from the URL but it returns an object based on the path name .ex /:theme so you need to keep that in mind when parsing

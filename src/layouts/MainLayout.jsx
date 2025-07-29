@@ -8,6 +8,7 @@ import InformationContext from "../contexts/InformationContext";
 function MainLayout() {
   const [darkMode, setDarkMode] = useState(true);
 
+  // Both of these are for pulling and storing on localstorage.
   const [info, setInfo] = useState(() => {
     const infoSaved = localStorage.getItem("savedInfo");
     if (infoSaved == null) return [];
@@ -18,6 +19,7 @@ function MainLayout() {
     localStorage.setItem("savedInfo", JSON.stringify(info));
   }, [info]);
 
+  // InformationContext.Provider for context of info and setinfo
   return (
     <>
       <InformationContext.Provider value={{ info, setInfo }}>

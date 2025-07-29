@@ -8,6 +8,7 @@ import EditButton from "../components/EditButton";
 import deleteFlashCard from "../util/deleteFlashCard";
 import BackButton from "../components/BackButton";
 
+// :theme/:card page, shows the markdown and the actual note
 function ShowFlashCardPage() {
   const URLParams = useParams();
   const { info, setInfo } = useContext(InformationContext);
@@ -30,12 +31,14 @@ function ShowFlashCardPage() {
     setCard(validCard);
   }, []);
 
+  // handleEdit is passed on the editButton
   function handleEdit(e) {
     e.stopPropagation();
     e.preventDefault();
     navigate(`edit`);
   }
 
+  // handleDelete  is passed on the delete button
   function handleDelete(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -60,7 +63,6 @@ function ShowFlashCardPage() {
           </div>
           <div className="flex gap-1">
             <EditButton enableDarkMode={true} editAction={handleEdit} />
-
             <DeleteButton handleDeleteAction={handleDelete} />
           </div>
         </div>
