@@ -137,7 +137,19 @@ function FlashCardPageWrapper({
             />
           ) : (
             <div className="border-1 rounded-lg px-4 py-6 prose prose-sm md:prose-base dark:prose-invert max-w-full mt-7">
-              <ReactMarkdown>{noteContent}</ReactMarkdown>
+              <ReactMarkdown
+                components={{
+                  img: ({ node, ...props }) => (
+                    <img
+                      {...props}
+                      className="mx-auto "
+                      alt={props.alt || ""}
+                    />
+                  ),
+                }}
+              >
+                {noteContent}
+              </ReactMarkdown>
             </div>
           )}
           {showNoteError && <p className="text-red-600">Please set a note</p>}

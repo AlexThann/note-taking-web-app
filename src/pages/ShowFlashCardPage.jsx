@@ -30,6 +30,12 @@ function ShowFlashCardPage() {
     setCard(validCard);
   }, []);
 
+  function handleEdit(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    navigate(`edit`);
+  }
+
   function handleDelete(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -53,14 +59,22 @@ function ShowFlashCardPage() {
             {card.cardTitle}
           </div>
           <div className="flex gap-1">
-            <Link to="edit">
-              <EditButton enableDarkMode={true} />
-            </Link>
+            <EditButton enableDarkMode={true} editAction={handleEdit} />
+
             <DeleteButton handleDeleteAction={handleDelete} />
           </div>
         </div>
-        <div className="border-2 rounded-lg px-7 py-10 prose prose-sm md:prose-base dark:prose-invert w-full m-auto max-w-full ">
-          <ReactMarkdown>{card.cardNote}</ReactMarkdown>
+        {/* images are centered using components of markdown. Otherwise this can be used for tailwind [&_img]:m-auto which targets all img elements. */}
+        <div className=" border-2 rounded-lg px-7 py-10 prose prose-sm md:prose-base dark:prose-invert w-full m-auto max-w-full ">
+          <ReactMarkdown
+            components={{
+              img: ({ node, ...props }) => (
+                <img {...props} className="mx-auto " alt={props.alt || ""} />
+              ),
+            }}
+          >
+            {card.cardNote}
+          </ReactMarkdown>
         </div>
       </div>
     </MainBodyCover>
