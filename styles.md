@@ -1,8 +1,6 @@
-Ookay
-
 # For typography
 
-- Either Rubik or **Inter**
+- **Inter**
 
 # Colors
 

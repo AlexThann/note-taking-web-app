@@ -8,8 +8,8 @@ export default function NavBar({ darkMode, setDarkMode }) {
   return (
     <nav className=" h-2/12 flex justify-between px-[5%] py-8  z-10 shadow-md  dark:bg-primary-black-navigation bg-primary-white-smoke text-white">
       <Link to="/">
-        <h1 className="dark:text-white text-black font-semibold text-lg md:text-2xl ">
-          Flashcard App, maybe
+        <h1 className="dark:text-white text-black font-semibold text-lg md:text-2xl">
+          Flashcard App
         </h1>
       </Link>
       <button
