@@ -37,7 +37,7 @@ User starts at the home page where he can create a new theme
 
 ### Home page shows the created themes:
 
-![home page of all themes](/public/screenshots/theme_page.png)
+![home page of all themes](/public/screenshots/themes_page.png)
 
 ### After a theme is choosen the flashcards are shown:
 
