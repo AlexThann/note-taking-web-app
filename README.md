@@ -1,5 +1,7 @@
 # Flashcard App
+
 ## Overview
+
 This project is a flashcard and markdown note-taking web app created with **react, react-router and tailwindcss**. I have wanted to use a note app in order to keep notes about different subjects or themes, like either my computer engineering classes or for books that im reading. Thus, I came up with this project. Although i could very well use some already existing note-taking app, it's always way more enjoyable and fun to create your own since this is what programming is about.
 
 ---
@@ -54,9 +56,11 @@ User starts at the home page where he can create a new theme
 ---
 
 ## Live Preview:
+
 [Click Here!](https://note-taking-web-app.vercel.app/)
 
 ---
+
 ## Tech Stack
 
 - **Frontend:** React, React Router, Tailwind CSS
